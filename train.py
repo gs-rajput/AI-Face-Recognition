@@ -14,11 +14,11 @@ os.makedirs(person_dir, exist_ok=True)
 
 cap = cv2.VideoCapture(0)
 count = 0
-max_images = 100  # Changed from 5 to 20
+max_images = 100  
 
 print(f"[INFO] Press 's' to start capturing {max_images} images for {name}...")
 
-# Wait until user presses 's' to start
+
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -28,7 +28,7 @@ while True:
     key = cv2.waitKey(1)
     if key == ord('s'):
         break
-    elif key == 27:  # ESC to quit
+    elif key == 27: 
         cap.release()
         cv2.destroyAllWindows()
         exit()
@@ -56,7 +56,7 @@ while count < max_images:
 cap.release()
 cv2.destroyAllWindows()
 
-# Encode and save
+
 print("[INFO] Encoding faces...")
 known_encodings = []
 known_names = []
