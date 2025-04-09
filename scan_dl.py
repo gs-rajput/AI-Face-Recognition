@@ -6,12 +6,12 @@ import numpy as np
 from facenet_pytorch import InceptionResnetV1, MTCNN
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Setup
+
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 resnet = InceptionResnetV1(pretrained='vggface2').eval().to(device)
-mtcnn = MTCNN(keep_all=True, device=device)  # Enable multi-face detection
+mtcnn = MTCNN(keep_all=True, device=device)  
 
-# Load Encodings
+
 encodings_dir = "dl_encodings"
 known_embeddings = []
 known_names = []
@@ -24,7 +24,7 @@ for file in os.listdir(encodings_dir):
 
 known_embeddings = np.array(known_embeddings)
 
-# Scan
+
 cap = cv2.VideoCapture(0)
 print("[INFO] Scanning... Press ESC to exit.")
 
@@ -47,7 +47,7 @@ while True:
             confidence = sims[best_idx] * 100
             name = known_names[best_idx] if confidence > 60 else "Unknown"
 
-            # Draw box & label
+    
             x1, y1, x2, y2 = map(int, box)
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.putText(frame, f"{name} ({confidence:.2f}%)", (x1, y1 - 10),
