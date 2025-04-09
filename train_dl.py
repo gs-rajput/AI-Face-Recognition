@@ -6,7 +6,6 @@ import numpy as np
 import time
 from facenet_pytorch import InceptionResnetV1, MTCNN
 
-# Setup
 os.makedirs("dl_encodings", exist_ok=True)
 os.makedirs("dl_dataset", exist_ok=True)
 
@@ -18,10 +17,10 @@ name = input("Enter your name: ").strip()
 dataset_dir = os.path.join("dl_dataset", name)
 os.makedirs(dataset_dir, exist_ok=True)
 
-print("[INFO] Press 's' to start capturing 20 images...")
-cap = cv2.VideoCapture(0)
 count = 0
 max_images = 100
+print(f"[INFO] Press 's' to start capturing {max_images} images...")
+cap = cv2.VideoCapture(0)
 
 while True:
     ret, frame = cap.read()
@@ -47,7 +46,6 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-# Encode Faces
 print("[INFO] Encoding faces with deep learning model...")
 embeddings = []
 for img_name in os.listdir(dataset_dir):
